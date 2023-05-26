@@ -1,0 +1,29 @@
+.sort-input {
+	font-family: var(--basic-font);
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--text-primary);
+
+	cursor: pointer;
+}
+
+.sort-input__title {
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.sort-input__field {
+	&:checked {
+		pointer-events: none;
+
+		& ~ .sort-input__title {
+			color: var(--primary);
+			cursor: auto;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+}

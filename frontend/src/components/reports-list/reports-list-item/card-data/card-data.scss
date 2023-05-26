@@ -1,0 +1,25 @@
+.card-data {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.card-data-item {
+	display: flex;
+	align-items: center;
+
+	font-family: var(--basic-font);
+	font-size: 13px;
+	font-weight: 400;
+	color: var(--text-primary);
+	text-transform: uppercase;
+
+	&--title {
+		justify-content: start;
+	}
+
+	&--value {
+		justify-content: end;
+		font-weight: 600;
+		white-space: nowrap;
+	}
+}

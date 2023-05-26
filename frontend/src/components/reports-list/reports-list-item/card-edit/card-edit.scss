@@ -1,0 +1,134 @@
+.card-edit {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 20px;
+}
+
+.card-edit__label {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: min-content 1fr;
+	gap: 3px;
+}
+
+.card-edit__input-title {
+	font-family: var(--basic-font);
+	font-size: 13px;
+	font-weight: 400;
+	color: var(--text-primary);
+	text-transform: uppercase;
+}
+
+.card-edit__input {
+	width: 100%;
+	padding: 5px 10px;
+
+	font-family: var(--basic-font);
+	font-size: 13px;
+	font-weight: 400;
+	color: var(--text-primary);
+	text-transform: uppercase;
+
+	border: 1px solid var(--overlay);
+
+	transition: all .2s ease;
+
+	&:hover,
+	&:focus {
+		border-color: var(--text-primary);
+	}
+}
+
+.card-edit__unit {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10px;
+	border: none;
+}
+
+.card-edit__unit-label {
+}
+
+.card-edit__unit-label-text {
+	border: 1px solid var(--overlay);
+	width: 30px;
+	height: 30px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	cursor: pointer;
+
+	background-color: var(--surface);
+
+	font-family: var(--basic-font);
+	font-size: 13px;
+	font-weight: 400;
+	color: var(--overlay);
+	text-transform: uppercase;
+
+	transition: all .2s ease;
+
+	&:hover,
+	&:focus {
+		background-color: var(--overlay);
+		color: var(--text-primary);
+		border-color: var(--text-primary);
+	}
+}
+
+.card-edit__unit-input:checked ~ .card-edit__unit-label-text {
+	color: var(--text-primary);
+}
+
+.card-edit__controls {
+	padding-top: 40px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 10px;
+}
+
+.card-edit__date {
+	width: 100%;
+	padding: 3px 10px;
+	cursor: pointer;
+}
+
+.card-edit__button {
+	width: 100%;
+	padding: 4px 6px;
+
+	cursor: pointer;
+
+	background-color: var(--surface);
+	border: 1px solid var(--text-inverse);
+
+	box-shadow: 0 9px 38px 0 rgba(2, 2, 2, 0.15);
+
+	font-family: var(--basic-font);
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--text-primary);
+	text-transform: uppercase;
+
+	&--delete {
+		padding: 2px 6px;
+		font-size: 13px;
+		border-color: rgba(255, 0, 0, 1.0);
+		color: rgba(255, 0, 0, 1.0);
+
+		&:hover {
+			background-color: rgba(255, 0, 0, 0.1);
+		}
+	}
+
+	&:hover:not(.card-edit__button--delete) {
+		background-color: var(--overlay);
+	}
+}

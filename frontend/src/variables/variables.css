@@ -1,0 +1,13 @@
+:root {
+	--basic-font: 'Public Sans', 'Arial', sans-serif;
+
+	/* colors */
+	--bg: #F7F8F9;
+	--border: #F1F2F4;
+	--surface: #FFFFFF;
+	--overlay: #0000001a;
+	--text-primary: #091E42;
+	--text-secondary: #626F86;
+	--primary: #1D7AFC;
+	--text-inverse: #000000;
+}

@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import { Server } from 'http';
 import { injectable, inject } from "inversify";
+const cors = require('cors');
 import 'reflect-metadata';
 import { json } from 'body-parser';
 //controllers
@@ -29,6 +30,7 @@ export class App {
 
 	useMiddleware(): void {
 		this.app.use(json());
+		this.app.use(cors());
 	};
 
 	useRoutes(): void {
