@@ -1,5 +1,11 @@
+import dayjs from 'dayjs';
+//services
+import { temperatureService } from '../../../../services';
+//types
+import type { IReportType } from '../../../../types/reports-type';
+//vars
+import { reportUnitValue } from '../../../../variables/variables';
 //styles
-import { IReportType } from '../../../../types/reports-type';
 import './card-data.scss';
 
 interface ICardDataPropsType {
@@ -11,17 +17,26 @@ const CardData = ({ report }: ICardDataPropsType): JSX.Element => {
 
 	return (
 		<dl className='card-data'>
-			<dt className='card-data-item card-data-item--title'>temperature</dt>
-			<dd className='card-data-item card-data-item--value'>{temperature}</dd>
-
-			<dt className='card-data-item card-data-item--title'>unit</dt>
-			<dd className='card-data-item card-data-item--value'>{unit}</dd>
+			{
+				unit === reportUnitValue.K ?
+				<>
+					<dt className='card-data-item card-data-item--title'>temperature-{unit}</dt>
+					<dd className='card-data-item card-data-item--value'>{temperature}</dd>
+				</>
+				:
+				<>
+					<dt className='card-data-item card-data-item--title'>temperature-K</dt>
+					<dd className='card-data-item card-data-item--value'>{temperatureService.convertToKelvin(unit, +temperature)}</dd>
+					<dt className='card-data-item card-data-item--title'>temperature-{unit}</dt>
+					<dd className='card-data-item card-data-item--value'>{temperature}</dd>
+				</>
+			}
 
 			<dt className='card-data-item card-data-item--title'>city</dt>
 			<dd className='card-data-item card-data-item--value'>{city}</dd>
 
 			<dt className='card-data-item card-data-item--title'>date</dt>
-			<dd className='card-data-item card-data-item--value'>{date}</dd>
+			<dd className='card-data-item card-data-item--value'>{dayjs(date).format('YYYY-MM-DD')}</dd>
 		</dl>
 	);
 };

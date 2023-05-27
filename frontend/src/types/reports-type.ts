@@ -1,3 +1,5 @@
+import { reportUnitValue } from "../variables/variables";
+
 export interface IReportType {
 	id: string;
 	temperature: number;
@@ -6,4 +8,4 @@ export interface IReportType {
 	date: string;
 };
 
-export type TemperatureUnit = 'C' | 'K' | 'F';
+export type TemperatureUnit = reportUnitValue;

@@ -43,7 +43,9 @@ class FacetingService implements IFacetingService {
 				sortResult = sortedByTempDown;
 				break;
 			default:
-				sortResult = reportsArray;
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				const _: never = sortAlias;
+				throw new Error('[FacetingService] uncorrect sortAlias')
 		}
 		return sortResult;
 	};

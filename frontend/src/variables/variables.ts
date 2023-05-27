@@ -49,7 +49,7 @@ export const enum cardInnersNames {
 };
 
 export const enum reportUnitValue {
-	C = 'c',
-	K = 'k',
-	F = 'f',
+	C = 'C',
+	K = 'K',
+	F = 'F',
 };
