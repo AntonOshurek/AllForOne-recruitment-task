@@ -2,8 +2,22 @@
 	width: 100%;
 	padding: 100px 50px;
 
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+}
+
+.error__title {
 	font-family: var(--basic-font);
-	font-size: 18px;
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--text-primary);
+	text-transform: uppercase;
+}
+
+.error__info {
+	font-family: var(--basic-font);
+	font-size: 16px;
 	font-weight: 600;
 	color: var(--text-primary);
 	text-transform: uppercase;

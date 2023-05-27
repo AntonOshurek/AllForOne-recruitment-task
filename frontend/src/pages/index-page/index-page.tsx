@@ -6,7 +6,7 @@ import './index-page.scss';
 
 const IndexPage = (): JSX.Element => {
 	return (
-		<div className='index-page'>
+		<div className='index-page container'>
 			<Header/>
 
 			<Sort/>

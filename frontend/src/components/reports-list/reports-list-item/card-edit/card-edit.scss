@@ -84,6 +84,7 @@
 
 .card-edit__unit-input:checked ~ .card-edit__unit-label-text {
 	color: var(--text-primary);
+	border-color: var(--text-primary);
 }
 
 .card-edit__controls {
