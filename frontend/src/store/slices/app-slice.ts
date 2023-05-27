@@ -1,43 +1,61 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+//state
+import { appState } from '../state/app-state';
+//services
+import { facetingService } from '../../services';
+//types
+import type { ISetServerDataAction, ISetSortedDataAction, ISetSortTypeAction } from '../../types/action-types';
+import type { AppThunk } from '../../types/store-types';
 
 export const appSlice = createSlice({
 	name: 'app',
-	initialState: {},
+	initialState: appState,
 
 	reducers: {
-		// setServices: (state, action: PayloadAction<ISetServicesActionType>) => {
-		// 	const { services } = action.payload;
-		// 	state.services = services;
-		// },
-		// setPackage: (state, action: PayloadAction<ISetPackageActionType>) => {
-		// 	const { pack } = action.payload;
-		// 	state.pack = pack;
-		// },
-		// setYearsRange: (state, action: PayloadAction<ISetYearsActionType>) => {
-		// 	const { years } = action.payload;
-		// 	state.yearsRange = years;
-		// },
+		setServerData: (state, action: PayloadAction<ISetServerDataAction>) => {
+			const { serverData } = action.payload;
+			state.serverData = serverData;
+		},
+		setSortedData: (state, action: PayloadAction<ISetSortedDataAction>) => {
+			const { sortedData } = action.payload;
+			state.sortedData = sortedData;
+		},
+		setSortType: (state, action: PayloadAction<ISetSortTypeAction>) => {
+			const { sortType } = action.payload;
+			state.sortType = sortType;
+		},
 	},
 });
 
-// export const { setServices, setPackage, setYearsRange } = appSlice.actions;
+export const { setServerData, setSortedData, setSortType } = appSlice.actions;
 
-// export const setServicesAction =
-// 	(action: ISetServicesActionType): AppThunk =>
-// 	(dispatch, getState) => {
-// 		dispatch(appSlice.actions.setServices(action));
-// 	};
+export const setServerDataAction =
+	(action: ISetServerDataAction): AppThunk =>
+	(dispatch, getState) => {
+		dispatch(appSlice.actions.setServerData(action));
 
-// export const setPackageAction =
-// 	(action: ISetPackageActionType): AppThunk =>
-// 	(dispatch, getState) => {
-// 		dispatch(appSlice.actions.setPackage(action));
-// 	};
+		const currentSortType = getState().app.sortType;
+		const sortedData = facetingService.sort(currentSortType, action.serverData);
+		dispatch(appSlice.actions.setSortedData({sortedData: sortedData}));
+	};
 
-// export const setYearsRangeAction =
-// 	(action: ISetYearsActionType): AppThunk =>
-// 	(dispatch, getState) => {
-// 		dispatch(appSlice.actions.setYearsRange(action));
-// 	};
+export const setSortedDataAction =
+	(action: ISetSortedDataAction): AppThunk =>
+	(dispatch, getState) => {
+		const currentSortType = getState().app.sortType;
+		const sortedData = facetingService.sort(currentSortType, action.sortedData);
+		dispatch(appSlice.actions.setSortedData({sortedData: sortedData}));
+	};
+
+export const setSortTypeAction =
+	(action: ISetSortTypeAction): AppThunk =>
+	(dispatch, getState) => {
+		dispatch(appSlice.actions.setSortType(action));
+
+		const data = getState().app.serverData;
+		const sortedData = facetingService.sort(action.sortType, data);
+		dispatch(appSlice.actions.setSortedData({sortedData: sortedData}));
+	};
+
 
 export default appSlice.reducer;

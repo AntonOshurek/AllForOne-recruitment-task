@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChangeEvent } from 'react';
 //components
 import SortInput from './sort-input/sort-input';
+//store
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { setSortTypeAction } from '../../store/slices/app-slice';
+import { SelectorGetSortType } from '../../store/selectors/app-selectors';
 //vars
 import { SortAliases, SortTypesArray, SortTypes } from '../../variables/variables';
 //types
@@ -10,11 +14,18 @@ import type { ISortType } from '../../types/sort-types';
 import './sort.scss';
 
 const Sort = (): JSX.Element => {
-	const [sort, setSort] = useState<SortAliases>(SortAliases.SORT_BY_DEFAULT);
+	const dispatch = useAppDispatch();
+	const currentSortType = useAppSelector(SelectorGetSortType);
+
+	const [sort, setSort] = useState<SortAliases>(currentSortType);
 
 	const onSortInputHandler = (evt: ChangeEvent<HTMLInputElement>) => {
 		setSort(evt.target.value as SortAliases);
 	};
+
+	useEffect(() => {
+		dispatch(setSortTypeAction({sortType: sort}));
+	}, [sort]);
 
 	return (
 		<div className='sort'>
