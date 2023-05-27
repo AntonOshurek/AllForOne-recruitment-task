@@ -2,13 +2,18 @@
 import './error.scss';
 
 interface IErrorPropsType {
-	errText: string,
+	text: string,
+	err?: string;
 };
 
-const Error = ({errText}: IErrorPropsType): JSX.Element => {
+const Error = ({text, err}: IErrorPropsType): JSX.Element => {
 	return (
 		<div className="error">
-			<p>{errText}</p>
+			<h3 className='error__title'>{text}</h3>
+
+			{
+				err && <p className='error__info'>{err}</p>
+			}
 		</div>
 	);
 };

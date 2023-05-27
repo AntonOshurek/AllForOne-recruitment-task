@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 //components
 import ReportsListItem from './reports-list-item/reports-list-item';
-import { Error } from '../';
-import { LoadMoreButton } from '../';
+import { Error, LoadMoreButton, Loading } from '../';
 //api
 import reportsApi from '../../api/reports-api';
 //types
@@ -10,9 +9,14 @@ import type { IReportType } from '../../types/reports-type';
 //styles
 import './reports-list.scss';
 
+interface IErrorInfo {
+	text: string,
+	error: string,
+};
+
 const ReportsList = (): JSX.Element => {
 	const [reports, setReports] = useState<IReportType[]>([]);
-	const [error, setError] = useState<string>('');
+	const [error, setError] = useState<IErrorInfo | null>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -20,20 +24,26 @@ const ReportsList = (): JSX.Element => {
 
 		reportsApi.getAllReports()
 		.then((responce) => {
+			setError(null);
 			setLoading(false);
 			setReports(responce);
 		})
 		.catch((error) => {
-			setError('Oops, something went wrong. We are unable to retrieve data from the server. Please contact your system administrator.');
+			const errorInfo: IErrorInfo = {
+				text: 'Oops, something went wrong. We are unable to retrieve data from the server. Please contact your system administrator.',
+				error: error.toString(),
+			};
+
+			setError(errorInfo);
 		})
 	}, []);
 
 	let content;
 
-	if (error) {
-		content = <Error errText={error} />;
+	if (error !== null) {
+		content = <Error text={error.text} err={error.error}/>;
 	} else if (loading === true) {
-		content = <p>LOADING...</p>;
+		content = <Loading/>;
 	} else {
 		content = reports.map((report: IReportType) => {
 			return <ReportsListItem report={report} key={report.id} />;
@@ -51,35 +61,6 @@ const ReportsList = (): JSX.Element => {
 		</ul>
 	);
 
-	// if(error) {
-	// 	return <Error errText={error}/>
-	// } else if(loading === true) {
-	// 	return <p>LOADING...</p>
-	// } else {
-	// 	return (
-	// 		reports.map((report: IReportType) => {
-	// 			return <ReportsListItem report={report} key={report.id}/>
-	// 		})
-	// 	)
-	// }
-
-	// return (
-	// 	<>
-	// 		<ul className='reports-list'>
-
-	// 			{
-	// 				loading && <p>LOADING...</p>
-	// 			}
-	// 			{
-	// 				error ? <Error errText={error}/> : reports.map((report: IReportType) => {
-	// 					return <ReportsListItem report={report} key={report.id}/>
-	// 				})
-	// 			}
-	// 		</ul>
-
-	// 		<LoadMoreButton/>
-	// 	</>
-	// );
 };
 
 export default ReportsList;

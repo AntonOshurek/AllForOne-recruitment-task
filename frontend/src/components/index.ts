@@ -4,5 +4,6 @@ import LoadMoreButton from "./load-more-button/load-more-button";
 import ReportsList from "./reports-list/reports-list";
 import Sort from "./sort/sort";
 import Error from "./error/error";
+import Loading from "./loading/loading";
 
-export { Header, AddReportButton, LoadMoreButton, ReportsList, Sort, Error };
+export { Header, AddReportButton, LoadMoreButton, ReportsList, Sort, Error, Loading };
