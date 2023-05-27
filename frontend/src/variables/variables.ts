@@ -43,11 +43,6 @@ export const SortTypesArray: SortTypesArrayType = [
 	},
 ];
 
-export const enum cardInnersNames {
-	EDIT = 'edit',
-	DATA = 'data',
-};
-
 export const enum reportUnitValue {
 	C = 'C',
 	K = 'K',
