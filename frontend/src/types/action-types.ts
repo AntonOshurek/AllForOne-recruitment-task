@@ -7,8 +7,8 @@ export interface ISetServerDataAction {
 	serverData: IReportType[],
 };
 
-export interface ISetSortedDataAction {
-	sortedData: IReportType[],
+export interface ISetFacetingDataAction {
+	facetingData: IReportType[],
 };
 
 export interface ISetSortTypeAction {

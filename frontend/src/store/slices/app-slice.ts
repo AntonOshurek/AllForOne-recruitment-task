@@ -4,7 +4,7 @@ import { appState } from '../state/app-state';
 //services
 import { facetingService } from '../../services';
 //types
-import type { ISetServerDataAction, ISetSortedDataAction, ISetSortTypeAction } from '../../types/action-types';
+import type { ISetServerDataAction, ISetFacetingDataAction, ISetSortTypeAction } from '../../types/action-types';
 import type { AppThunk } from '../../types/store-types';
 
 export const appSlice = createSlice({
@@ -16,9 +16,9 @@ export const appSlice = createSlice({
 			const { serverData } = action.payload;
 			state.serverData = serverData;
 		},
-		setSortedData: (state, action: PayloadAction<ISetSortedDataAction>) => {
-			const { sortedData } = action.payload;
-			state.sortedData = sortedData;
+		setFacetingData: (state, action: PayloadAction<ISetFacetingDataAction>) => {
+			const { facetingData } = action.payload;
+			state.facetingData = facetingData;
 		},
 		setSortType: (state, action: PayloadAction<ISetSortTypeAction>) => {
 			const { sortType } = action.payload;
@@ -27,7 +27,7 @@ export const appSlice = createSlice({
 	},
 });
 
-export const { setServerData, setSortedData, setSortType } = appSlice.actions;
+export const { setServerData, setFacetingData, setSortType } = appSlice.actions;
 
 export const setServerDataAction =
 	(action: ISetServerDataAction): AppThunk =>
@@ -35,16 +35,16 @@ export const setServerDataAction =
 		dispatch(appSlice.actions.setServerData(action));
 
 		const currentSortType = getState().app.sortType;
-		const sortedData = facetingService.sort(currentSortType, action.serverData);
-		dispatch(appSlice.actions.setSortedData({sortedData: sortedData}));
+		const facetingData = facetingService.sort(currentSortType, action.serverData);
+		dispatch(appSlice.actions.setFacetingData({facetingData: facetingData}));
 	};
 
-export const setSortedDataAction =
-	(action: ISetSortedDataAction): AppThunk =>
+export const setFacetingDataAction =
+	(action: ISetFacetingDataAction): AppThunk =>
 	(dispatch, getState) => {
 		const currentSortType = getState().app.sortType;
-		const sortedData = facetingService.sort(currentSortType, action.sortedData);
-		dispatch(appSlice.actions.setSortedData({sortedData: sortedData}));
+		const facetingData = facetingService.sort(currentSortType, action.facetingData);
+		dispatch(appSlice.actions.setFacetingData({facetingData: facetingData}));
 	};
 
 export const setSortTypeAction =
@@ -53,8 +53,8 @@ export const setSortTypeAction =
 		dispatch(appSlice.actions.setSortType(action));
 
 		const data = getState().app.serverData;
-		const sortedData = facetingService.sort(action.sortType, data);
-		dispatch(appSlice.actions.setSortedData({sortedData: sortedData}));
+		const facetingData = facetingService.sort(action.sortType, data);
+		dispatch(appSlice.actions.setFacetingData({facetingData: facetingData}));
 	};
 
 

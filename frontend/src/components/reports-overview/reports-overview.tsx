@@ -5,7 +5,7 @@ import { Error, LoadMoreButton, Loading, ReportsList } from '..';
 import reportsApi from '../../api/reports-api';
 //store
 import { useAppDispatch } from '../../hooks/hooks';
-import { setServerDataAction, setSortedDataAction } from '../../store/slices/app-slice';
+import { setServerDataAction } from '../../store/slices/app-slice';
 //types
 import type { IReportType } from '../../types/reports-type';
 import type { IErrorInfo } from '../../types/types';

@@ -5,6 +5,6 @@ import type { IAppState } from "../../types/state-types";
 
 export const appState: IAppState = {
 	serverData: [],
-	sortedData: [],
+	facetingData: [],
 	sortType: SortAliases.SORT_BY_DEFAULT,
 };
