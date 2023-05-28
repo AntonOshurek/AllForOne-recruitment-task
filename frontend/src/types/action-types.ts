@@ -18,3 +18,7 @@ export interface ISetSortTypeAction {
 export interface IDeleteReportTypeAction {
 	id: string,
 };
+
+export interface IUpdateReportAction {
+	reportForUpdate: IReportType,
+};

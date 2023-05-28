@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from 'react';
 import UnitInput from './unit-input/unit-input';
 //store
 import { useAppDispatch } from '../../../../hooks/hooks';
-import { deleteReportAction } from '../../../../store/slices/app-slice';
+import { deleteReportAction, updateReportAction } from '../../../../store/slices/app-slice';
 //api
 import reportsApi from '../../../../api/reports-api';
 //types
@@ -58,7 +58,7 @@ const CardEdit = ({ saveHndler, report }: ICardEditProps): JSX.Element => {
 
 		reportsApi.updateReport(id, changedReport)
 		.then((responce) => {
-			//обновить стейт в app slice
+			dispatch(updateReportAction({reportForUpdate: responce}));
 			saveHndler();
 		})
 		.catch((error) => {
@@ -69,7 +69,6 @@ const CardEdit = ({ saveHndler, report }: ICardEditProps): JSX.Element => {
 	const onDeleteButtonHandler = (): void => {
 		reportsApi.deleteReport(id)
 		.then((responce) => {
-			//удалить элемент из app slice
 			dispatch(deleteReportAction({id}));
 		})
 		.catch((error) => {
