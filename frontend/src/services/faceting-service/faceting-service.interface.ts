@@ -1,9 +1,9 @@
 //vars
-import { SortAliases } from "../../variables/variables";
+import { FilterAliases, SortAliases } from "../../variables/variables";
 //types
 import type { IReportType } from "../../types/reports-type";
 
 export interface IFacetingService {
 	sort: (sortAlias: SortAliases, reportsArray: IReportType[]) => IReportType[],
-	filter: () => void,
+	filter: (filterAlias: FilterAliases, filterValue: string, reportsArray: IReportType[]) => IReportType[],
 };

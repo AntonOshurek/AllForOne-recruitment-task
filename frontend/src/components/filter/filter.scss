@@ -1,0 +1,68 @@
+.filter {
+	width: 100%;
+	padding: 10px 0;
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.filter__item {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+
+	cursor: pointer;
+
+	&:focus-within .filter__item-name {
+		color: var(--primary);
+	}
+}
+
+.filter__item-name {
+	font-family: var(--basic-font);
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--text-primary);
+}
+
+.filter__item-input {
+	height: 30px;
+	width: 200px;
+	padding: 2px 5px;
+
+	font-family: var(--basic-font);
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--text-primary);
+
+	border: 1px solid var(--overlay);
+	transition: all .1s ease;
+
+	&:hover,
+	&:focus {
+		border-color: var(--text-primary);
+	}
+}
+
+.filter__clear-button {
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 30px;
+	height: 30px;
+	background-color: transparent;
+	border: 1px solid var(--overlay);
+
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		border-color: var(--text-primary);
+	}
+}

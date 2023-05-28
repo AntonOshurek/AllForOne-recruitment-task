@@ -15,6 +15,10 @@ export interface ISetSortTypeAction {
 	sortType: SortAliases,
 };
 
+export interface ISetCityFilterTypeAction {
+	city: string,
+};
+
 export interface IDeleteReportTypeAction {
 	id: string,
 };

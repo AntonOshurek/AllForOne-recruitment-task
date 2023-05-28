@@ -7,5 +7,6 @@ export interface IAppState {
 	serverData: IReportType[] | [],
 	facetingData: IReportType[]| [],
 	sortType: SortAliases,
+	cityFilter: string,
 	newReport: INewReportType | null,
 };

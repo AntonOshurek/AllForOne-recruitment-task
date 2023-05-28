@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 //components
-import { Header, Sort } from '../../components';
+import { Header, Sort, Filter } from '../../components';
 //styles
 import './index-page.scss';
 
@@ -10,6 +10,8 @@ const IndexPage = (): JSX.Element => {
 			<Header/>
 
 			<Sort/>
+
+			<Filter/>
 
 			<main className='index-page__main'>
 

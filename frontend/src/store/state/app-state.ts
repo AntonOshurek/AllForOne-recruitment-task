@@ -7,5 +7,6 @@ export const appState: IAppState = {
 	serverData: [],
 	facetingData: [],
 	sortType: SortAliases.SORT_BY_DEFAULT,
+	cityFilter: '',
 	newReport: null,
 };

@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //state
 import { appState } from '../state/app-state';
+//vars
+import { FilterAliases } from '../../variables/variables';
 //services
 import { facetingService } from '../../services';
 //types
-import type { ISetServerDataAction, ISetFacetingDataAction, ISetSortTypeAction, IDeleteReportTypeAction, IUpdateReportTypeAction, ISetNewReportTypeAction, IAddNewReportTypeAction } from '../../types/action-types';
+import type { ISetServerDataAction, ISetFacetingDataAction, ISetSortTypeAction, IDeleteReportTypeAction, IUpdateReportTypeAction, ISetNewReportTypeAction, IAddNewReportTypeAction, ISetCityFilterTypeAction } from '../../types/action-types';
 import type { AppThunk } from '../../types/store-types';
 
 export const appSlice = createSlice({
@@ -23,6 +25,10 @@ export const appSlice = createSlice({
 		setSortType: (state, action: PayloadAction<ISetSortTypeAction>) => {
 			const { sortType } = action.payload;
 			state.sortType = sortType;
+		},
+		setCityFilter: (state, action: PayloadAction<ISetCityFilterTypeAction>) => {
+			const { city } = action.payload;
+			state.cityFilter = city;
 		},
 		deleteReport: (state, action: PayloadAction<IDeleteReportTypeAction>) => {
 			const { id } = action.payload;
@@ -65,9 +71,18 @@ export const setFacetingDataAction =
 	(): AppThunk =>
 	(dispatch, getState) => {
 		const data = getState().app.serverData;
+
 		const currentSortType = getState().app.sortType;
+		const cityFilter = getState().app.cityFilter;
+
 		const facetingData = facetingService.sort(currentSortType, data);
-		dispatch(appSlice.actions.setFacetingData({facetingData: facetingData}));
+		const filtredArray = facetingService.filter(
+			FilterAliases.FILTER_BY_CITY,
+			cityFilter,
+			facetingData
+		);
+
+		dispatch(appSlice.actions.setFacetingData({facetingData: filtredArray}));
 	};
 
 export const setSortTypeAction =
@@ -75,10 +90,15 @@ export const setSortTypeAction =
 	(dispatch, getState) => {
 		dispatch(appSlice.actions.setSortType(action));
 
-		//when we add new sort type, we need update faceting data
-		const data = getState().app.serverData;
-		const facetingData = facetingService.sort(action.sortType, data);
-		dispatch(appSlice.actions.setFacetingData({facetingData: facetingData}));
+		dispatch(setFacetingDataAction());
+	};
+
+export const setCityFilterTypeAction =
+	(action: ISetCityFilterTypeAction): AppThunk =>
+	(dispatch, getState) => {
+		dispatch(appSlice.actions.setCityFilter(action));
+
+		dispatch(setFacetingDataAction());
 	};
 
 export const deleteReportAction =
@@ -86,7 +106,6 @@ export const deleteReportAction =
 	(dispatch) => {
 		dispatch(appSlice.actions.deleteReport(action));
 
-		//when we delete one item, we need update faceting data
 		dispatch(setFacetingDataAction());
 	};
 
@@ -95,7 +114,6 @@ export const updateReportAction =
 	(dispatch) => {
 		dispatch(appSlice.actions.updateReport(action));
 
-		//when we delete one item, we need update faceting data
 		dispatch(setFacetingDataAction());
 	};
 
@@ -116,7 +134,6 @@ export const addNewReportAction =
 	(dispatch) => {
 		dispatch(appSlice.actions.addNewReport({newReport: action.newReport}));
 
-		//when we add new one to state, we need update faceting data
 		dispatch(setFacetingDataAction());
 	};
 
