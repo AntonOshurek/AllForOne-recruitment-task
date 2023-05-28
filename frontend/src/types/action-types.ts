@@ -14,3 +14,7 @@ export interface ISetFacetingDataAction {
 export interface ISetSortTypeAction {
 	sortType: SortAliases,
 };
+
+export interface IDeleteReportTypeAction {
+	id: string,
+};

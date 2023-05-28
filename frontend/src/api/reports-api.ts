@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosError, AxiosInstance } from "axios";
 //types
 import type { IReportType } from "../types/reports-type";
 
@@ -33,9 +33,51 @@ class ReportsApi {
 			if(error instanceof Error) {
 				return Promise.reject(new Error(error.message));
 			} else {
-				return Promise.reject('somthing wrong in getAllReports.');
+				return Promise.reject('somthing wrong in get all reports.');
 			};
 		}
+	};
+
+	async updateReport(reportId: string, changedReport: IReportType): Promise<IReportType> {
+		try {
+      const response = await this.REPORTS_API_INSTANCE.put(
+				`reports/${reportId}`,
+				changedReport
+			);
+
+			if (response.status >= 200 && response.status < 300) {
+				return response.data;
+			} else {
+				return Promise.reject(new Error(response.statusText));
+			};
+		} catch(error) {
+			if(error instanceof AxiosError) {
+				return Promise.reject(error.request.response)
+			} else {
+				return Promise.reject('somthing wrong in update report.');
+			};
+		};
+	};
+
+	async deleteReport(reportId: string): Promise<void> {
+		try {
+			const response = await this.REPORTS_API_INSTANCE.delete(
+				`reports/${reportId}`,
+			);
+
+			if (response.status >= 200 && response.status < 300) {
+				return response.data;
+			} else {
+				return Promise.reject(new Error(response.statusText));
+			};
+
+		} catch (error) {
+			if(error instanceof AxiosError && error.response?.data.error) {
+				return Promise.reject(error.response?.data.error);
+			} else {
+				return Promise.reject('somthing wrong in delete report.');
+			};
+		};
 	};
 
 };

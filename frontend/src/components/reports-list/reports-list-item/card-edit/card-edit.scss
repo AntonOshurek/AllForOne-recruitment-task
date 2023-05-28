@@ -133,3 +133,14 @@
 		background-color: var(--overlay);
 	}
 }
+
+.card-edit__error {
+	width: 100%;
+	height: min-content;
+
+	font-family: var(--basic-font);
+	font-size: 14px;
+	font-weight: 400;
+	color: red;
+	text-align: center;
+}
