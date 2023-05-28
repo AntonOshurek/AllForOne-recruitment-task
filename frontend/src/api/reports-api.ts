@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 //types
-import type { IReportType } from "../types/reports-type";
+import type { INewReportType, IReportType } from "../types/reports-type";
 
 class ReportsApi {
 	private REPORTS_API_INSTANCE: AxiosInstance;
@@ -72,10 +72,33 @@ class ReportsApi {
 			};
 
 		} catch (error) {
-			if(error instanceof AxiosError && error.response?.data.error) {
-				return Promise.reject(error.response?.data.error);
+			if(error instanceof AxiosError && error.response?.data) {
+				return Promise.reject(error.response?.data);
 			} else {
 				return Promise.reject('somthing wrong in delete report.');
+			};
+		};
+	};
+
+	async addReport(newReport: INewReportType): Promise<IReportType> {
+		try {
+			const response = await this.REPORTS_API_INSTANCE.post(
+				`reports`,
+				newReport
+			);
+
+			if (response.status >= 200 && response.status < 300) {
+				return response.data;
+			} else {
+				return Promise.reject(new Error(response.statusText));
+			};
+
+		} catch (error) {
+			if(error instanceof AxiosError && error.response?.data) {
+				return Promise.reject(error.response?.data);
+			} else {
+				console.log(error)
+				return Promise.reject('somthing wrong in add report.');
 			};
 		};
 	};

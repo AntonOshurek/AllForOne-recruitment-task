@@ -4,7 +4,7 @@ import { appState } from '../state/app-state';
 //services
 import { facetingService } from '../../services';
 //types
-import type { ISetServerDataAction, ISetFacetingDataAction, ISetSortTypeAction, IDeleteReportTypeAction, IUpdateReportAction } from '../../types/action-types';
+import type { ISetServerDataAction, ISetFacetingDataAction, ISetSortTypeAction, IDeleteReportTypeAction, IUpdateReportTypeAction, ISetNewReportTypeAction, IAddNewReportTypeAction } from '../../types/action-types';
 import type { AppThunk } from '../../types/store-types';
 
 export const appSlice = createSlice({
@@ -28,7 +28,7 @@ export const appSlice = createSlice({
 			const { id } = action.payload;
 			state.serverData = state.serverData.filter((item) => item.id !== id);
 		},
-		updateReport: (state, action: PayloadAction<IUpdateReportAction>) => {
+		updateReport: (state, action: PayloadAction<IUpdateReportTypeAction>) => {
 			const { reportForUpdate } = action.payload;
 			state.serverData = state.serverData.map((item) => {
 				if(item.id === reportForUpdate.id) {
@@ -37,10 +37,19 @@ export const appSlice = createSlice({
 				return item;
 			});
 		},
+		setNewReport: (state, action: PayloadAction<ISetNewReportTypeAction>) => {
+			state.newReport = action.payload.newReport;
+		},
+		discardNewReport: (state) => {
+			state.newReport = null;
+		},
+		addNewReport: (state, action: PayloadAction<IAddNewReportTypeAction>) => {
+			state.serverData = [action.payload.newReport, ...state.serverData];
+		}
 	},
 });
 
-export const { setServerData, setFacetingData, setSortType, deleteReport } = appSlice.actions;
+export const { setServerData, setFacetingData, setSortType, deleteReport, setNewReport, discardNewReport, addNewReport } = appSlice.actions;
 
 export const setServerDataAction =
 	(action: ISetServerDataAction): AppThunk =>
@@ -74,7 +83,7 @@ export const setSortTypeAction =
 
 export const deleteReportAction =
 	(action: IDeleteReportTypeAction): AppThunk =>
-	(dispatch, getState) => {
+	(dispatch) => {
 		dispatch(appSlice.actions.deleteReport(action));
 
 		//when we delete one item, we need update faceting data
@@ -82,13 +91,33 @@ export const deleteReportAction =
 	};
 
 export const updateReportAction =
-	(action: IUpdateReportAction): AppThunk =>
-	(dispatch, getState) => {
+	(action: IUpdateReportTypeAction): AppThunk =>
+	(dispatch) => {
 		dispatch(appSlice.actions.updateReport(action));
 
 		//when we delete one item, we need update faceting data
 		dispatch(setFacetingDataAction());
 	};
 
+export const setNewReportAction =
+	(action: ISetNewReportTypeAction): AppThunk =>
+	(dispatch) => {
+		dispatch(appSlice.actions.setNewReport({newReport: action.newReport}));
+	};
+
+export const discardNewReportAction =
+	(): AppThunk =>
+	(dispatch) => {
+		dispatch(appSlice.actions.discardNewReport());
+	};
+
+export const addNewReportAction =
+	(action: IAddNewReportTypeAction): AppThunk =>
+	(dispatch) => {
+		dispatch(appSlice.actions.addNewReport({newReport: action.newReport}));
+
+		//when we add new one to state, we need update faceting data
+		dispatch(setFacetingDataAction());
+	};
 
 export default appSlice.reducer;

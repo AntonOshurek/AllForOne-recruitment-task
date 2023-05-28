@@ -93,7 +93,7 @@ export class ReportsController extends BaseController implements IReportsControl
     }
     const sanitizedFields = sanitizeFields(body);
 
-		const result: IReportType[] = await this.reportsService.add(sanitizedFields);
+		const result: IReportType = await this.reportsService.add(sanitizedFields);
 
 		this.ok(res, result);
 	};

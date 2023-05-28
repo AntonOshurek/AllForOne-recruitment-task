@@ -1,7 +1,7 @@
 //vars
 import { SortAliases } from "../variables/variables";
 //types
-import type { IReportType } from "./reports-type";
+import type { INewReportType, IReportType } from "./reports-type";
 
 export interface ISetServerDataAction {
 	serverData: IReportType[],
@@ -19,6 +19,14 @@ export interface IDeleteReportTypeAction {
 	id: string,
 };
 
-export interface IUpdateReportAction {
+export interface IUpdateReportTypeAction {
 	reportForUpdate: IReportType,
+};
+
+export interface ISetNewReportTypeAction {
+	newReport: INewReportType,
+};
+
+export interface IAddNewReportTypeAction {
+	newReport: IReportType,
 };

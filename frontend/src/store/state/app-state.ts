@@ -7,4 +7,5 @@ export const appState: IAppState = {
 	serverData: [],
 	facetingData: [],
 	sortType: SortAliases.SORT_BY_DEFAULT,
+	newReport: null,
 };

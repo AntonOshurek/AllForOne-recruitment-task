@@ -24,13 +24,15 @@ export class ReportsService {
 		return result;
 	};
 
-	async add(sanitizedFields: INewReportType): Promise<IReportType[]> {
-		DBData.reports.push({
+	async add(sanitizedFields: INewReportType): Promise<IReportType> {
+		const newReportItem = {
 			id: uuid(),
 			...sanitizedFields,
-		});
+		};
 
-		return DBData.reports;
+		DBData.reports.unshift(newReportItem);
+
+		return newReportItem;
 	};
 
 	async update(body: INewSanitizeReportType, report_id: string): Promise<IReportType | undefined> {

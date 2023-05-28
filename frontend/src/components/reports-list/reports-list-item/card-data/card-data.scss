@@ -1,6 +1,6 @@
 .card-data {
 	display: grid;
-	grid-template-columns: 1fr min-content;
+	grid-template-columns: min-content 1fr;
 }
 
 .card-data-item {
@@ -14,14 +14,18 @@
 	color: var(--text-primary);
 	text-transform: uppercase;
 
-	white-space: nowrap;
+	// white-space: nowrap;
+
 
 	&--title {
 		justify-content: start;
+		white-space: nowrap;
 	}
 
 	&--value {
 		justify-content: end;
+		text-align: right;
 		font-weight: 600;
+		word-break: break-all;
 	}
 }
