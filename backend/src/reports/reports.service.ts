@@ -24,16 +24,18 @@ export class ReportsService {
 		return result;
 	};
 
-	async add(sanitizedFields: INewReportType): Promise<IReportType[]> {
-		DBData.reports.push({
+	async add(sanitizedFields: INewReportType): Promise<IReportType> {
+		const newReportItem = {
 			id: uuid(),
 			...sanitizedFields,
-		});
+		};
 
-		return DBData.reports;
+		DBData.reports.unshift(newReportItem);
+
+		return newReportItem;
 	};
 
-	async update(body: INewSanitizeReportType, report_id: string): Promise<IReportType[] | undefined> {
+	async update(body: INewSanitizeReportType, report_id: string): Promise<IReportType | undefined> {
 		const reportIndex = DBData.reports.findIndex(
 			(report) => report.id === report_id
 		);
@@ -45,14 +47,19 @@ export class ReportsService {
 		const report = { ...DBData.reports[reportIndex], ...sanitizeFields(body) };
 		DBData.reports[reportIndex] = report;
 
-		return DBData.reports;
+		return report;
 	};
 
 	async delete(report_id: string): Promise<boolean> {
-		DBData.reports = DBData.reports.filter(
-			(report) => report.id !== report_id
-		);
+		const findObjectById: boolean = DBData.reports.some(item => item.id === report_id);
 
-		return true;
+		if(findObjectById) {
+			DBData.reports = DBData.reports.filter(
+				(report) => report.id !== report_id
+			);
+			return true;
+		} else {
+			return false
+		};
 	};
 };

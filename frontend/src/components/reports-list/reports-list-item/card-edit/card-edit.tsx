@@ -2,6 +2,13 @@ import dayjs from 'dayjs';
 import { ChangeEvent, useState } from 'react';
 //components
 import UnitInput from './unit-input/unit-input';
+//store
+import { useAppDispatch } from '../../../../hooks/hooks';
+import { deleteReportAction, updateReportAction } from '../../../../store/slices/app-slice';
+//api
+import reportsApi from '../../../../api/reports-api';
+//data
+import ChangedReport from '../../../../data/changed-report';
 //types
 import type { IReportType } from '../../../../types/reports-type';
 //vars
@@ -17,10 +24,14 @@ interface ICardEditProps {
 const CardEdit = ({ saveHndler, report }: ICardEditProps): JSX.Element => {
 	const {temperature, unit, city, date, id } = report;
 
+	const dispatch = useAppDispatch();
+
 	const [newUnit, setNewUnit] = useState<reportUnitValue>(unit);
 	const [newTemp, setNewTemp] = useState<number>(+temperature);
 	const [newCity, setNewCity] = useState<string>(city);
 	const [newDate, setNewDate] = useState<string>(date);
+
+	const [apiError, setApiError] = useState<string | null>(null);
 
 	const onUnitInputHandler = (evt: ChangeEvent<HTMLInputElement>): void => {
 		setNewUnit(evt.target.value as reportUnitValue);
@@ -39,21 +50,32 @@ const CardEdit = ({ saveHndler, report }: ICardEditProps): JSX.Element => {
 	};
 
 	const onSaveButtonHandler = (): void => {
-		const changedReport: IReportType = {
+		const changedReport: IReportType = new ChangedReport({
 			id: id,
 			temperature: newTemp,
 			unit: newUnit,
 			city: newCity,
-			date: newDate,
-		};
+			date: dayjs(newDate).format('YYYY-MM-DD'),
+		});
 
-		console.log(changedReport)
-
-		saveHndler();
+		reportsApi.updateReport(id, changedReport)
+		.then((responce) => {
+			dispatch(updateReportAction({reportForUpdate: responce}));
+			saveHndler();
+		})
+		.catch((error) => {
+			setApiError(error);
+		});
 	};
 
 	const onDeleteButtonHandler = (): void => {
-		console.log('DELETE');
+		reportsApi.deleteReport(id)
+		.then((responce) => {
+			dispatch(deleteReportAction({id}));
+		})
+		.catch((error) => {
+			setApiError(error);
+		});
 	};
 
 	return (
@@ -82,8 +104,14 @@ const CardEdit = ({ saveHndler, report }: ICardEditProps): JSX.Element => {
 
 			<input className='card-edit__date' type="date" value={newDate} onChange={onDateInputHandler}/>
 
+			{
+				apiError !== null ? <div className='card-edit__error'>{apiError}</div> : null
+			}
+
 			<div className='card-edit__controls'>
-				<button className='card-edit__button' type='button' onClick={onSaveButtonHandler}>save</button>
+				<button className='card-edit__button' type='button' onClick={onSaveButtonHandler}>
+					save
+				</button>
 				<button className='card-edit__button card-edit__button--delete' type='button' onClick={onDeleteButtonHandler}>delete</button>
 			</div>
 		</div>

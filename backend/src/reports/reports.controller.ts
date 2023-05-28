@@ -93,7 +93,7 @@ export class ReportsController extends BaseController implements IReportsControl
     }
     const sanitizedFields = sanitizeFields(body);
 
-		const result: IReportType[] = await this.reportsService.add(sanitizedFields);
+		const result: IReportType = await this.reportsService.add(sanitizedFields);
 
 		this.ok(res, result);
 	};
@@ -131,12 +131,13 @@ export class ReportsController extends BaseController implements IReportsControl
 			return;
 		};
 
-		const result = await this.reportsService.delete(req.params.report_id);
+		const result: boolean = await this.reportsService.delete(req.params.report_id);
 
-		if(result) {
-			res.status(200).send("Report deleted");
-		} else {
-			res.status(400).json({ error: "Report is defined" });
-		};
+		if(!result) {
+			res.status(400).json({ error: "Report not found for delete" });
+			return;
+		}
+
+		this.ok(res, "Report deleted");
 	};
 };

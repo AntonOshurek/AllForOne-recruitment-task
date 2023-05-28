@@ -9,6 +9,10 @@ export const enum SortAliases {
 	SORT_BY_TEMP_DOWN = 'sort-by-temp-down',
 };
 
+export const enum FilterAliases {
+	FILTER_BY_CITY = 'filter-by-city'
+};
+
 export const enum SortTypes {
 	SORT_DEFAULT = 'sort-default',
 	SORT_DATE = 'sort-date',

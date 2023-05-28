@@ -30,7 +30,7 @@ const Sort = (): JSX.Element => {
 	return (
 		<div className='sort'>
 			<form className='sort__fieldset'>
-				<legend className='visually-hidden'>SORT</legend>
+				<h2 className='visually-hidden'>SORT</h2>
 
 				<div className='sort__block'>
 

@@ -20,14 +20,14 @@ const CardData = ({ report }: ICardDataPropsType): JSX.Element => {
 			{
 				unit === reportUnitValue.K ?
 				<>
-					<dt className='card-data-item card-data-item--title'>temperature-{unit}</dt>
+					<dt className='card-data-item card-data-item--title'>temp-{unit}</dt>
 					<dd className='card-data-item card-data-item--value'>{temperature}</dd>
 				</>
 				:
 				<>
-					<dt className='card-data-item card-data-item--title'>temperature-K</dt>
+					<dt className='card-data-item card-data-item--title'>temp-K</dt>
 					<dd className='card-data-item card-data-item--value'>{temperatureService.convertToKelvin(unit, +temperature)}</dd>
-					<dt className='card-data-item card-data-item--title'>temperature-{unit}</dt>
+					<dt className='card-data-item card-data-item--title'>temp-{unit}</dt>
 					<dd className='card-data-item card-data-item--value'>{temperature}</dd>
 				</>
 			}

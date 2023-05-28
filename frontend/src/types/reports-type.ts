@@ -8,4 +8,11 @@ export interface IReportType {
 	date: string;
 };
 
+export interface INewReportType {
+	temperature: number;
+	unit: TemperatureUnit;
+	city: string;
+	date: string;
+};
+
 export type TemperatureUnit = reportUnitValue;

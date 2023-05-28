@@ -6,5 +6,7 @@ import Sort from "./sort/sort";
 import Error from "./error/error";
 import Loading from "./loading/loading";
 import ReportsList from "./reports-list/reports-list";
+import NewReportItem from "./new-report/new-report";
+import Filter from "./filter/filter";
 
-export { Header, AddReportButton, LoadMoreButton, ReportsOverview, Sort, Error, Loading, ReportsList };
+export { Header, AddReportButton, LoadMoreButton, ReportsOverview, Sort, Error, Loading, ReportsList, NewReportItem, Filter };

@@ -34,7 +34,7 @@ const ReportsListItem = ({ report }: IReportsListItemProps): JSX.Element => {
 	};
 
 	return (
-		<li className={`card ${isEditing && 'card--edit'}`}>
+		<li className={`card ${isEditing ? 'card--edit' : ''}`}>
 			<div className="card__form">
 				<div className="card__inner">
 
