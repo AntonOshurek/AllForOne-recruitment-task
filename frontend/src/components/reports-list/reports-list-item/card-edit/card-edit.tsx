@@ -7,6 +7,8 @@ import { useAppDispatch } from '../../../../hooks/hooks';
 import { deleteReportAction, updateReportAction } from '../../../../store/slices/app-slice';
 //api
 import reportsApi from '../../../../api/reports-api';
+//data
+import ChangedReport from '../../../../data/changed-report';
 //types
 import type { IReportType } from '../../../../types/reports-type';
 //vars
@@ -48,13 +50,13 @@ const CardEdit = ({ saveHndler, report }: ICardEditProps): JSX.Element => {
 	};
 
 	const onSaveButtonHandler = (): void => {
-		const changedReport: IReportType = {
+		const changedReport: IReportType = new ChangedReport({
 			id: id,
 			temperature: newTemp,
 			unit: newUnit,
 			city: newCity,
 			date: dayjs(newDate).format('YYYY-MM-DD'),
-		};
+		});
 
 		reportsApi.updateReport(id, changedReport)
 		.then((responce) => {

@@ -9,7 +9,6 @@ export interface IReportType {
 };
 
 export interface INewReportType {
-	id?: string;
 	temperature: number;
 	unit: TemperatureUnit;
 	city: string;
