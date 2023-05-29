@@ -18,4 +18,13 @@
 	&:hover {
 		background-color: var(--overlay);
 	}
+
+	&:disabled {
+		opacity: 0.4;
+		pointer-events: none;
+
+		&:hover {
+			background-color: var(--surface);
+		}
+	}
 }

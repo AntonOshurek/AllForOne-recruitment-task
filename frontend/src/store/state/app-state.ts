@@ -8,5 +8,6 @@ export const appState: IAppState = {
 	facetingData: [],
 	sortType: SortAliases.SORT_BY_DEFAULT,
 	cityFilter: '',
+	paginationCount: 1,
 	newReport: null,
 };

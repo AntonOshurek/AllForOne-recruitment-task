@@ -1,6 +1,8 @@
 //types
 import type { SortTypesArrayType } from "../types/sort-types";
 
+export const itemsOnOnePage = 8;
+
 export const enum SortAliases {
 	SORT_BY_DEFAULT = 'sort-by-default',
 	SORT_BY_DATE_UP = 'sort-by-date-up',

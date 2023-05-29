@@ -6,7 +6,17 @@ import { FilterAliases } from '../../variables/variables';
 //services
 import { facetingService } from '../../services';
 //types
-import type { ISetServerDataAction, ISetFacetingDataAction, ISetSortTypeAction, IDeleteReportTypeAction, IUpdateReportTypeAction, ISetNewReportTypeAction, IAddNewReportTypeAction, ISetCityFilterTypeAction } from '../../types/action-types';
+import type {
+	ISetServerDataAction,
+	ISetFacetingDataAction,
+	ISetSortTypeAction,
+	IDeleteReportTypeAction,
+	IUpdateReportTypeAction,
+	ISetNewReportTypeAction,
+	IAddNewReportTypeAction,
+	ISetCityFilterTypeAction,
+	ISetPaginationCountTypeAction
+} from '../../types/action-types';
 import type { AppThunk } from '../../types/store-types';
 
 export const appSlice = createSlice({
@@ -51,11 +61,23 @@ export const appSlice = createSlice({
 		},
 		addNewReport: (state, action: PayloadAction<IAddNewReportTypeAction>) => {
 			state.serverData = [action.payload.newReport, ...state.serverData];
-		}
+		},
+		setPaginationCount: (state, action: PayloadAction<ISetPaginationCountTypeAction>) => {
+			state.paginationCount = action.payload.newPaginationCount;
+		},
 	},
 });
 
-export const { setServerData, setFacetingData, setSortType, deleteReport, setNewReport, discardNewReport, addNewReport } = appSlice.actions;
+export const {
+	setServerData,
+	setFacetingData,
+	setSortType,
+	deleteReport,
+	setNewReport,
+	discardNewReport,
+	addNewReport,
+	setPaginationCount,
+} = appSlice.actions;
 
 export const setServerDataAction =
 	(action: ISetServerDataAction): AppThunk =>

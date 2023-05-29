@@ -2,6 +2,7 @@
 import { SortAliases } from "../variables/variables";
 //types
 import type { INewReportType, IReportType } from "./reports-type";
+import type { IPaginationCounterType } from "./sort-types";
 
 export interface ISetServerDataAction {
 	serverData: IReportType[],
@@ -33,4 +34,8 @@ export interface ISetNewReportTypeAction {
 
 export interface IAddNewReportTypeAction {
 	newReport: IReportType,
+};
+
+export interface ISetPaginationCountTypeAction {
+	newPaginationCount: number,
 };
