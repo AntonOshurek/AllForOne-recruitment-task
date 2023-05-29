@@ -6,4 +6,9 @@ export interface ISortType {
 	alias: SortAliases,
 };
 
+export interface IPaginationCounterType {
+	pageCount: number,
+	maxPageCount: number,
+};
+
 export type SortTypesArrayType = ISortType[];

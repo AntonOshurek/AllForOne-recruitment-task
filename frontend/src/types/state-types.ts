@@ -8,5 +8,6 @@ export interface IAppState {
 	facetingData: IReportType[]| [],
 	sortType: SortAliases,
 	cityFilter: string,
+	paginationCount: number,
 	newReport: INewReportType | null,
 };
