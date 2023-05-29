@@ -30,10 +30,7 @@ export const setServerDataAction =
 	(action: ISetServerDataAction): AppThunk =>
 	(dispatch, getState) => {
 		dispatch(setServerData(action));
-
-		const currentSortType = getState().app.sortType;
-		const facetingData = facetingService.sort(currentSortType, action.serverData);
-		dispatch(setFacetingData({facetingData: facetingData}));
+		dispatch(setFacetingDataAction());
 	};
 
 export const setFacetingDataAction =
