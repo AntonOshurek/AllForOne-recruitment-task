@@ -10,7 +10,7 @@ import NewReport from '../../data/new-report';
 import reportsApi from '../../api/reports-api';
 //store
 import { useAppDispatch } from '../../hooks/hooks';
-import { addNewReportAction, discardNewReportAction } from '../../store/slices/app-slice';
+import { addNewReportAction, discardNewReportAction } from '../../store/actions/app-actions';
 //types
 import type { INewReportType } from '../../types/reports-type';
 //styles

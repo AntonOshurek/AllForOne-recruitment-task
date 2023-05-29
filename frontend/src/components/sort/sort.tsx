@@ -4,7 +4,7 @@ import { ChangeEvent } from 'react';
 import SortInput from './sort-input/sort-input';
 //store
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import { setSortTypeAction } from '../../store/slices/app-slice';
+import { setSortTypeAction } from '../../store/actions/app-actions';
 import { SelectorGetSortType } from '../../store/selectors/app-selectors';
 //vars
 import { SortAliases, SortTypesArray, SortTypes } from '../../variables/variables';
