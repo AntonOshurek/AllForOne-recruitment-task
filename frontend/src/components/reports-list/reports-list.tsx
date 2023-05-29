@@ -17,13 +17,8 @@ const ReportsList = (): JSX.Element => {
 
 	const currentPageCount = useAppSelector(SelectorGetPageCount);
 
-	// Вычисляем индексы начала и конца для текущей страницы
 	const startIndex = 0;
 	const endIndex = startIndex + (itemsOnOnePage * currentPageCount);
-
-	// console.log(Math.ceil(reportsData.length / itemsOnOnePage))
-
-	// Получаем элементы для текущей страницы
 	const paginatedData = reportsData.slice(startIndex, endIndex);
 
 	return (

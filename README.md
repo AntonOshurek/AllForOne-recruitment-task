@@ -1,5 +1,5 @@
-![commits](https://img.shields.io/github/last-commit/AntonOshurek/AllForOne-recruitment-task?style=plastic)
-![lang](https://img.shields.io/github/languages/top/AntonOshurek/AllForOne-recruitment-task)
+![commits](https://img.shields.io/github/last-commit/AntonOshurek/allforone-recruitment-task?style=plastic)
+![lang](https://img.shields.io/github/languages/top/AntonOshurek/allforone-recruitment-task)
 
 # Application for saving meteorological reports
 This application created for All For One Poznań.
@@ -24,7 +24,7 @@ instructions on how to run the backend and frontend are in the respective folder
 * **instal Node.js LTS version**
 https://nodejs.org/en/
 
-* **instal all dependencies**
+* **instal all dependencies in frontend and backend side**
 
 ```
 npm i

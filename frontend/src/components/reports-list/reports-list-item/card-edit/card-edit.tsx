@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from 'react';
 import UnitInput from './unit-input/unit-input';
 //store
 import { useAppDispatch } from '../../../../hooks/hooks';
-import { deleteReportAction, updateReportAction } from '../../../../store/slices/app-slice';
+import { deleteReportAction, updateReportAction } from '../../../../store/actions/app-actions';
 //api
 import reportsApi from '../../../../api/reports-api';
 //data

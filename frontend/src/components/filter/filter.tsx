@@ -1,7 +1,7 @@
 import { ChangeEvent, useState, useEffect } from 'react';
 //store
 import { useAppDispatch } from '../../hooks/hooks';
-import { setCityFilterTypeAction } from '../../store/slices/app-slice';
+import { setCityFilterTypeAction } from '../../store/actions/app-actions';
 //vars
 import { FilterAliases } from '../../variables/variables';
 //styles
